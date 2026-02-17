@@ -15,3 +15,7 @@ contributions_tensor = torch.tensor(contributions.values, dtype = torch.float32)
 grants_tensor = torch.tensor(grants.values, dtype = torch.float32)
 assets_tensor = torch.tensor(assets.values, dtype=torch.float32)
 lr = .0001
+epochs = 1000
+
+for epoch in range(epochs):
+    
