@@ -16,6 +16,7 @@ grants_tensor = torch.tensor(grants.values, dtype = torch.float32)
 assets_tensor = torch.tensor(assets.values, dtype=torch.float32)
 lr = .0001
 epochs = 1000
+x = torch.zeros(len(accounts_tensor))
 
 for epoch in range(epochs):
-    
+    loss = ( x - accounts_tensor)
