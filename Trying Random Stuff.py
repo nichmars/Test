@@ -5,6 +5,11 @@ import torch
 
 df = pd.read_excel("Filtered Data with Subtypes Again.xlsx")
 
+df2 = df[:-1]
+last_thing = df.iloc[-1:]
+df_adj = pd.concat([last_thing,df2], ignore_index = True)
+
+
 accounts = df["Accounts"]
 contributions = df["Contributions"]
 grants = df["Grants"]
@@ -20,3 +25,12 @@ x = torch.zeros(len(accounts_tensor))
 
 for epoch in range(epochs):
     loss = ( x - accounts_tensor)
+
+    loss.backward()
+
+    with torch.no_grad:
+        x-= lr*x.grad
+
+    x.grad.zero_()
+    if epoch == 0 % 10:
+        print(f"Step {epoch+1:02d}: x = {x.item():.4f}, loss = {loss.item():.6f}")
