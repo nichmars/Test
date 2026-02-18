@@ -16,7 +16,7 @@ df_adj = df_adj.rename(columns={
     "Grants":"Grants_2",
     "Assets": "Assets_2",
 })
-df_adj = df_adj.columns.drop(["Type", "subtype"])
+df_adj = df_adj.drop(columns=["Type", "subtype"])
 df_comb = pd.concat([df, df_adj], axis = 1)
 
 df_comb.to_excel("Appened Years Dataset.xlsx")
