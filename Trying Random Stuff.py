@@ -12,13 +12,13 @@ df_adj = df_adj.rename(columns={
     'Accounts':"Accounts_2",
     "Contributions": "Contributions_2",
     "Grants":"Grants_2",
-    "Assets": "Assets_2",
+    "Assets": "Assets_2"
 })
 df_adj = df_adj.drop(columns=["Type", "subtype"])
 df_comb = pd.concat([df, df_adj], axis = 1)
 
 df_comb.to_excel("Appened Years Dataset.xlsx")
-
+print(df_comb.columns)
 accounts = df["Accounts"]
 contributions = df["Contributions"]
 grants = df["Grants"]
