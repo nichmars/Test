@@ -5,9 +5,7 @@ import torch
 
 df = pd.read_excel("Filtered Data with Subtypes Again.xlsx")
 
-df2 = df[:-1]
-last_thing = df.iloc[-1:]
-df_adj = pd.concat([last_thing,df2], ignore_index = True)
+df_adj = df.shift(1)
 df_adj = df_adj.rename(columns={
     'EIN':'EIN_2',
     'Year':'Previous Year',
