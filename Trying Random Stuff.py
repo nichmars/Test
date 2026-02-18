@@ -7,7 +7,7 @@ df = pd.read_excel("Filtered Data with Subtypes Again.xlsx")
 
 df_adj = df.shift(1)
 df_adj = df_adj.rename(columns={
-    'EIN':'EIN_2',
+    'ein':'ein_2',
     'Year':'Previous Year',
     'Accounts':"Accounts_2",
     "Contributions": "Contributions_2",
