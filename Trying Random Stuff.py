@@ -8,6 +8,15 @@ df = pd.read_excel("Filtered Data with Subtypes Again.xlsx")
 df2 = df[:-1]
 last_thing = df.iloc[-1:]
 df_adj = pd.concat([last_thing,df2], ignore_index = True)
+df_adj = df_adj.rename(columns={
+    'EIN':'EIN_2',
+    'Year':'Previous Year',
+    'Accounts':"Accounts_2",
+    "Contributions": "Contributions_2",
+    "Grants":"Grants_2",
+    "Assets": "Assets_2",
+})
+df_adj = df_adj.columns.drop(["Type", "subtype"])
 df_comb = pd.concat([df, df_adj], axis = 1)
 
 df_comb.to_excel("Appened Years Dataset.xlsx")
