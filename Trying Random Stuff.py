@@ -8,7 +8,9 @@ df = pd.read_excel("Filtered Data with Subtypes Again.xlsx")
 df2 = df[:-1]
 last_thing = df.iloc[-1:]
 df_adj = pd.concat([last_thing,df2], ignore_index = True)
+df_comb = pd.concat([df, df_adj], axis = 1)
 
+df_comb.to_excel("Appened Years Dataset.xlsx")
 
 accounts = df["Accounts"]
 contributions = df["Contributions"]
