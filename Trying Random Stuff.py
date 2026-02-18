@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 import torch
 
 # df = pd.read_excel("Filtered Data with Subtypes Again.xlsx")
@@ -26,21 +27,26 @@ accounts = df["Accounts"]
 contributions = df["Contributions"]
 grants = df["Grants"]
 assets = df["Assets"]
-accounts_2 = df["Accounts"]
-contributions_2 = df["Contributions"]
-grants_2 = df["Grants"]
-assets_2 = df["Assets"]
+accounts_2 = df["Accounts_2"]
+contributions_2 = df["Contributions_2"]
+grants_2 = df["Grants_2"]
+assets_2 = df["Assets_2"]
 
-accounts_tensor = torch.tensor(accounts.values, dtype = torch.float32)
-contributions_tensor = torch.tensor(contributions.values, dtype = torch.float32)
-grants_tensor = torch.tensor(grants.values, dtype = torch.float32)
-assets_tensor = torch.tensor(assets.values, dtype=torch.float32)
+y = pd.concat([accounts, contributions, grants, assets], axis = 1)
+x = pd.concat([accounts_2, contributions_2, grants_2, assets_2], axis = 1)
+
+scaler = StandardScaler()
+
+x_scaled = scaler.fit_transform(x)
+x_scaled_tensor = torch.tensor(x_scaled, dtype = torch.float32)
+y_scaled = scaler.fit_transform(y)
+y_scaled_tensor = torch.tensor(y_scaled, dtype = torch.float32)
+
 lr = .0001
 epochs = 1000
-x = torch.zeros(len(accounts_tensor))
 
 for epoch in range(epochs):
-    loss = ( x - accounts_tensor)
+    loss = (x_scaled_tensor - y_scaled_tensor)**2
 
     loss.backward()
 
